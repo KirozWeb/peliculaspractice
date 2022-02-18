@@ -32,4 +32,10 @@ controladorPeliculas.get("/buscarPeliculasTitulo/:titulo", async function(req,re
     })
 })
 
+controladorPeliculas.post("/crearPelicula",async function(req,res){
+    let peliculaNueva = req.body;
+    let respuesta = await servicioPeliculas.crearPelicula(peliculaNueva);
+    respuesta.send(respuesta);
+})
+
 module.exports = controladorPeliculas;
