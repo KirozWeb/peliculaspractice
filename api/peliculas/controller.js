@@ -32,10 +32,40 @@ controladorPeliculas.get("/buscarPeliculasTitulo/:titulo", async function(req,re
     })
 })
 
+/**
+ * 3 FORMAS PARA CAPTURAR LA INFORMACION DE UNA PETICION
+ * PARAMETROS -> GET/POST/PUT/DELETE
+ * QUERY STRING -> ?clave=valor&clave=valor /GET/POST/PUT/DELETE
+ * CUERPO (BODY)-> POST/PUT 
+ */
+
+
 controladorPeliculas.post("/crearPelicula",async function(req,res){
     let peliculaNueva = req.body;
     let respuesta = await servicioPeliculas.crearPelicula(peliculaNueva);
-    respuesta.send(respuesta);
+    res.send(respuesta);
+})
+
+/*
+http://localhost:3200/api/peliculas/actualizaPelicula/sdslkj999292
+      {
+          "titulo":"nuevoTitulo",
+          "ano" : nuevoAno
+      }
+*/
+controladorPeliculas.put("/actualizarPelicula/:id", async function(req,res){
+    console.log("controlador");
+    let id = req.params.id;
+    let pelicula = req.body;
+    let respuesta = await servicioPeliculas.actualizarPelicula(id,pelicula);
+    res.send(respuesta);
+})
+
+controladorPeliculas.delete("/eliminarPelicula",async function(req,res){
+    console.log("Eliminar pelicula");
+    let id = req.query.id;
+    let respuesta = await servicioPeliculas.eliminarPelicula(id);
+    res.send(respuesta);
 })
 
 module.exports = controladorPeliculas;

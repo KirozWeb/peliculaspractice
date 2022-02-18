@@ -38,7 +38,7 @@ basedatos.conectar()
     .then(function(){
         app.listen(puerto,function(){
             console.log("API Ejecutandose en el puerto " + puerto);
-            console.log(basedatos.obtenerConexion());
+            //console.log(basedatos.obtenerConexion());
         });
     })
     .catch(function(error){
