@@ -2,6 +2,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
+const cors = require('cors');
+const helmet = require('helmet');
+const compression = require('compression');
 
 const controladorPeliculas = require('./api/peliculas/controller');
 const controladorUsuarios = require('./api/usuarios/controller');
@@ -21,6 +24,9 @@ require('dotenv').config();
  * INICIAR LA CONFIGURACION
  */
  const puerto = process.env.PORT;
+app.use(cors());//CONFIGURACION DE SEGURIDAD
+app.use(helmet());//CONFIGURACION DE SEGURIDAD
+app.use(compression);
 
 app.use(bodyParser.json()); //TRANSFORMA LA PETICION EN JSON AUTOMATICAMENTE
 app.use(bodyParser.urlencoded({extended: true}));
