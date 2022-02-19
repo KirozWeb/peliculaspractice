@@ -1,11 +1,11 @@
 const express = require('express');
 const controladorPeliculas = express.Router();
 const servicioPeliculas = require('./service');
-
+const rutaProtegida = require('../auth/jwt').validarToken;
 /**
  * BUSCAR TODAS LAS PELICULAS
  */
-controladorPeliculas.get("/obtenerPeliculas", async function(req,res){
+controladorPeliculas.get("/obtenerPeliculas", rutaProtegida, async function(req,res){
     let peliculas = await servicioPeliculas.obtenerPeliculas();
     res.send({
         "mensaje" : "Listado de peliculas",
@@ -61,7 +61,7 @@ controladorPeliculas.put("/actualizarPelicula/:id", async function(req,res){
     res.send(respuesta);
 })
 
-controladorPeliculas.delete("/eliminarPelicula",async function(req,res){
+controladorPeliculas.delete("/eliminarPelicula", rutaProtegida, async function(req,res){
     console.log("Eliminar pelicula");
     let id = req.query.id;
     let respuesta = await servicioPeliculas.eliminarPelicula(id);

@@ -40,10 +40,10 @@ async function iniciarSesion(usuario){
             let esValida = bcrypt.compareSync(usuario.clave, claveEncriptada);
             if(esValida){
                 resultado.mensaje = "Inicio de sesion correcto";
-                //const token = crearToken(resultadoUsuario);
+                const token = crearToken(resultadoUsuario);
                 delete resultadoUsuario.clave;
                 resultado.datos = resultadoUsuario;
-                //resultado.token = token;
+                resultado.token = token;
             }
             else{
                 resultado.mensaje = "Contrasena invalida";

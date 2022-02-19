@@ -26,7 +26,7 @@ require('dotenv').config();
  const puerto = process.env.PORT;
 app.use(cors());//CONFIGURACION DE SEGURIDAD
 app.use(helmet());//CONFIGURACION DE SEGURIDAD
-app.use(compression);
+app.use(compression());
 
 app.use(bodyParser.json()); //TRANSFORMA LA PETICION EN JSON AUTOMATICAMENTE
 app.use(bodyParser.urlencoded({extended: true}));
